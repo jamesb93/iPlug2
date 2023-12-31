@@ -29,8 +29,9 @@ IPlugAPP::IPlugAPP(const InstanceInfo& info, const Config& config)
   
   Trace(TRACELOC, "%s%s", config.pluginName, config.channelIOStr);
 
-  SetChannelConnections(ERoute::kInput, 0, MaxNChannels(ERoute::kInput), true);
-  SetChannelConnections(ERoute::kOutput, 0, MaxNChannels(ERoute::kOutput), true);
+  // Initialize all channels as disconnected first
+  SetChannelConnections(ERoute::kInput, 0, MaxNChannels(ERoute::kInput), false);
+  SetChannelConnections(ERoute::kOutput, 0, MaxNChannels(ERoute::kOutput), false);
 
   SetBlockSize(DEFAULT_BLOCK_SIZE);
   
@@ -40,7 +41,7 @@ IPlugAPP::IPlugAPP(const InstanceInfo& info, const Config& config)
 bool IPlugAPP::EditorResize(int viewWidth, int viewHeight)
 {
   bool parentResized = false;
-    
+  
   if (viewWidth != GetEditorWidth() || viewHeight != GetEditorHeight())
   {
     #if defined OS_MAC || defined NO_IGRAPHICS 
@@ -84,7 +85,7 @@ bool IPlugAPP::SendMidiMsg(const IMidiMsg& msg)
 //    uint8_t status;
 //
 //    // if the midi channel out filter is set, reassign the status byte appropriately
-//    if(mAppHost->mMidiOutChannel > -1)
+//    if (mAppHost->mMidiOutChannel > -1)
 //      status = mAppHost->mMidiOutChannel-1 | ((uint8_t) msg.StatusMsg() << 4) ;
 
     std::vector<uint8_t> message;
@@ -126,12 +127,25 @@ void IPlugAPP::SendSysexMsgFromUI(const ISysEx& msg)
 
 void IPlugAPP::AppProcess(double** inputs, double** outputs, int nFrames)
 {
-  SetChannelConnections(ERoute::kInput, 0, MaxNChannels(ERoute::kInput), !IsInstrument()); //TODO: go elsewhere - enable inputs
-  SetChannelConnections(ERoute::kOutput, 0, MaxNChannels(ERoute::kOutput), true); //TODO: go elsewhere
+  // Get actual available channel counts from RTAudio
+  int numInputChannels = mAppHost->GetNumDeviceInputChannels();
+  int numOutputChannels = mAppHost->GetNumDeviceOutputChannels();
+  
+  // Connect only available channels, leave others disconnected
+  SetChannelConnections(ERoute::kInput, 0, std::min(numInputChannels, MaxNChannels(ERoute::kInput)), true);
+  SetChannelConnections(ERoute::kOutput, 0, std::min(numOutputChannels, MaxNChannels(ERoute::kOutput)), true);
+  
+  // Connect remaining channels as disconnected
+  if (numInputChannels < MaxNChannels(ERoute::kInput))
+    SetChannelConnections(ERoute::kInput, numInputChannels, MaxNChannels(ERoute::kInput) - numInputChannels, false);
+    
+  if (numOutputChannels < MaxNChannels(ERoute::kOutput)) 
+    SetChannelConnections(ERoute::kOutput, numOutputChannels, MaxNChannels(ERoute::kOutput) - numOutputChannels, false);
+
   AttachBuffers(ERoute::kInput, 0, NChannelsConnected(ERoute::kInput), inputs, GetBlockSize());
   AttachBuffers(ERoute::kOutput, 0, NChannelsConnected(ERoute::kOutput), outputs, GetBlockSize());
   
-  if(mMidiMsgsFromCallback.ElementsAvailable())
+  if (mMidiMsgsFromCallback.ElementsAvailable())
   {
     IMidiMsg msg;
     
@@ -142,7 +156,7 @@ void IPlugAPP::AppProcess(double** inputs, double** outputs, int nFrames)
     }
   }
   
-  if(mSysExMsgsFromCallback.ElementsAvailable())
+  if (mSysExMsgsFromCallback.ElementsAvailable())
   {
     SysExData data;
     
@@ -154,7 +168,7 @@ void IPlugAPP::AppProcess(double** inputs, double** outputs, int nFrames)
     }
   }
   
-  if(mMidiMsgsFromEditor.ElementsAvailable())
+  if (mMidiMsgsFromEditor.ElementsAvailable())
   {
     IMidiMsg msg;
 
