@@ -215,8 +215,14 @@ extern StaticStorage<CoreTextFontDescriptor> sFontDescriptorCache;
     
   self.layer.frame = self.frame;
   self.layer.opaque = YES;
-  self.layer.contentsScale = [UIScreen mainScreen].scale;
-  self.contentScaleFactor = [UIScreen mainScreen].scale;
+  
+#if TARGET_OS_VISION
+  CGFloat scale = 2.0;
+#else
+  CGFloat scale = [UIScreen mainScreen].scale;
+#endif
+  self.layer.contentsScale = scale;
+  self.contentScaleFactor = scale;
   
   CAMetalLayer* mtlLayer = (CAMetalLayer*) self.layer;
   mtlLayer.framebufferOnly = YES;
@@ -298,12 +304,14 @@ extern StaticStorage<CoreTextFontDescriptor> sFontDescriptorCache;
 {
   [super setFrame:frame];
   
-  // During the first layout pass, we will not be in a view hierarchy, so we guess our scale
+#if TARGET_OS_VISION
+  CGFloat scale = 2.0;
+#else
   CGFloat scale = [UIScreen mainScreen].scale;
-  
-  // If we've moved to a window by the time our frame is being set, we can take its scale as our own
-  if (self.window)
+  if (self.window) {
     scale = self.window.screen.scale;
+  }
+#endif
   
   [CATransaction begin];
   [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
