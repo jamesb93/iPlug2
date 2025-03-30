@@ -871,6 +871,14 @@ static AUAudioUnitPreset* NewAUPreset(NSInteger number, NSString* pName)
   return false;
 }
 
+- (void) sendMidiDataFromUI:(int64_t) sampleTime : (NSInteger) length : (const uint8_t*) midiBytes
+{
+  IMidiMsg msg;
+  msg.MakeNoteOnMsg(60, 127, 0);
+  
+  mPlug->SendMidiMsgFromUI(msg);
+}
+
 - (BOOL) supportsMPE
 {
   return mPlug->DoesMPE() ? YES : NO;

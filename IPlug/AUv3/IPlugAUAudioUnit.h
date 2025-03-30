@@ -34,6 +34,7 @@
 - (PLATFORM_VIEW*) openWindow: (PLATFORM_VIEW*) pParent;
 - (void) closeWindow;
 - (bool) sendMidiData:(int64_t) sampleTime : (NSInteger) length : (const uint8_t*) midiBytes;
+- (void) sendMidiDataFromUI:(int64_t) sampleTime : (NSInteger) length : (const uint8_t*) midiBytes;
 - (id<AUMessageChannel>)messageChannelFor:(NSString *)channelName;
 
 @end
