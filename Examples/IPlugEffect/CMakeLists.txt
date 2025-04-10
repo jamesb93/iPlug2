@@ -30,7 +30,7 @@ if (0)
 set(TARGET clap)
 add_library(${TARGET} MODULE ${SRC_FILES})
 iplug_target_add(${TARGET} PUBLIC 
-  LINK iPlug2_CLAP _base 
+  LINK iplug_CLAP _base 
   RESOURCE ${RESOURCES}
 )
 iplug_configure_target(${TARGET} clap)
@@ -39,7 +39,7 @@ iplug_configure_target(${TARGET} clap)
 set(TARGET vst2)
 add_library(${TARGET} MODULE ${SRC_FILES})
 iplug_target_add(${TARGET} PUBLIC 
-  LINK iPlug2_VST2 _base 
+  LINK iplug_VST2 _base 
   RESOURCE ${RESOURCES}
 )
 iplug_configure_target(${TARGET} vst2)
@@ -48,7 +48,7 @@ iplug_configure_target(${TARGET} vst2)
 set(TARGET vst3)
 add_library(${TARGET} MODULE ${SRC_FILES})
 iplug_target_add(${TARGET} PUBLIC 
-  LINK iPlug2_VST3 _base 
+  LINK iplug_VST3 _base 
   RESOURCE ${RESOURCES}
 )
 iplug_configure_target(${TARGET} vst3)
@@ -58,7 +58,7 @@ if(APPLE)
   set(TARGET auv2)
   add_library(${TARGET} MODULE ${SRC_FILES})
   iplug_target_add(${TARGET} PUBLIC 
-    LINK iPlug2_AUv2 _base 
+    LINK iplug_AUv2 _base 
     RESOURCE ${RESOURCES}
   )
   iplug_configure_target(${TARGET} auv2)

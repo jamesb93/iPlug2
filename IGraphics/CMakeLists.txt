@@ -204,7 +204,7 @@ foreach (Target ${Flavours})
 endforeach()
 
 if (TARGET IGraphics_VST3)
-  target_link_libraries(IGraphics_VST3 PUBLIC iPlug2_VST3)
+  target_link_libraries(IGraphics_VST3 PUBLIC iplug_VST3)
   target_compile_definitions(IGraphics_VST3 PUBLIC VST3_API)
 endif()
 
