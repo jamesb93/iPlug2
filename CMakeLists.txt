@@ -15,8 +15,6 @@ add_subdirectory(Dependencies)
 add_subdirectory(IPlug)
 add_subdirectory(iGraphics)
 
-include(Scripts/cmake/APP.cmake)
-
 option(IPLUG2_BUILD_EXAMPLES "Build examples" ON)
 
 if (IPLUG2_BUILD_EXAMPLES)
