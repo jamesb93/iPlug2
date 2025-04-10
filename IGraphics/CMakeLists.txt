@@ -3,16 +3,16 @@ if (APPLE)
 endif()
 
 set(Flavours
-  iGraphics
-  iGraphics_VST3
+  IGraphics
+  IGraphics_VST3
 )
 
 if (APPLE)
-  list(APPEND iGraphics_AU iGraphics_AUv3)
+  list(APPEND IGraphics_AU IGraphics_AUv3)
 endif()
 
 if (IPLUG_AAX)
-  list(APPEND iGraphics_AAX)
+  list(APPEND IGraphics_AAX)
 endif()
 
 # TODO: can we provide a single target and forward obj-c class definions to downstream targets?
@@ -203,19 +203,19 @@ foreach (Target ${Flavours})
     endif()
 endforeach()
 
-if (TARGET iGraphics_VST3)
-  target_link_libraries(iGraphics_VST3 PUBLIC iPlug2_VST3)
-  target_compile_definitions(iGraphics_VST3 PUBLIC VST3_API)
+if (TARGET IGraphics_VST3)
+  target_link_libraries(IGraphics_VST3 PUBLIC iPlug2_VST3)
+  target_compile_definitions(IGraphics_VST3 PUBLIC VST3_API)
 endif()
 
-if (TARGET iGraphics_AU)
-  target_compile_definitions(iGraphics_AU PUBLIC AU_API)
+if (TARGET IGraphics_AU)
+  target_compile_definitions(IGraphics_AU PUBLIC AU_API)
 endif()
-if (TARGET iGraphics_AUv3)
-  target_compile_definitions(iGraphics_AUv3 PUBLIC AUv3_API)
+if (TARGET IGraphics_AUv3)
+  target_compile_definitions(IGraphics_AUv3 PUBLIC AUv3_API)
 endif()
-if (TARGET iGraphics_AAX)
+if (TARGET IGraphics_AAX)
   # FIXME: embarassingly untested
-  target_link_libraries(iGraphics_VST3 PUBLIC AAX::Sdk)
-  target_compile_definitions(iGraphics_AAX PUBLIC AAX_API)
+  target_link_libraries(IGraphics_VST3 PUBLIC AAX::Sdk)
+  target_compile_definitions(IGraphics_AAX PUBLIC AAX_API)
 endif()

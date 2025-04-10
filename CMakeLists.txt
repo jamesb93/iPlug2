@@ -13,7 +13,7 @@ add_subdirectory(WDL)
 add_subdirectory(Dependencies)
 
 add_subdirectory(IPlug)
-add_subdirectory(iGraphics)
+add_subdirectory(IGraphics)
 
 option(IPLUG2_BUILD_EXAMPLES "Build examples" ON)
 
