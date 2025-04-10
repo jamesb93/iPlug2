@@ -64,7 +64,7 @@ function(iplug_add_app PlugName)
     enable_language(OBJCXX)
     # Set language for files combining C++ and Objective-C
     set_source_files_properties(${sdk}/IPlugAPP_main.cpp DIRECTORY "${CMAKE_SOURCE_DIR}" PROPERTIES LANGUAGE "OBJCXX")
-    target_link_libraries(${TargetName} PUBLIC Swell)
+    target_link_libraries(${TargetName} PUBLIC Swell "-framework CoreMIDI")
 
     target_link_options(${TargetName} BEFORE PUBLIC -ObjC)
 
