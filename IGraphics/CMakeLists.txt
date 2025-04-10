@@ -4,7 +4,7 @@ endif()
 
 set(Flavours
   igraphics
-  igraphics_VST3
+  igraphics_vst3
 )
 
 if (APPLE)
@@ -203,9 +203,9 @@ foreach (Target ${Flavours})
     endif()
 endforeach()
 
-if (TARGET igraphics_VST3)
-  target_link_libraries(igraphics_VST3 PUBLIC iplug_VST3)
-  target_compile_definitions(igraphics_VST3 PUBLIC VST3_API)
+if (TARGET igraphics_vst3)
+  target_link_libraries(igraphics_vst3 PUBLIC iplug_vst3)
+  target_compile_definitions(igraphics_vst3 PUBLIC VST3_API)
 endif()
 
 if (TARGET igraphics_AU)
@@ -216,6 +216,6 @@ if (TARGET igraphics_AUv3)
 endif()
 if (TARGET igraphics_AAX)
   # FIXME: embarassingly untested
-  target_link_libraries(igraphics_VST3 PUBLIC AAX::Sdk)
+  target_link_libraries(igraphics_vst3 PUBLIC AAX::Sdk)
   target_compile_definitions(igraphics_AAX PUBLIC AAX_API)
 endif()

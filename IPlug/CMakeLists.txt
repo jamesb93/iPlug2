@@ -2,7 +2,7 @@ if (APPLE)
   enable_language(OBJCXX)
 endif()
 
-add_library(iplug_Core STATIC ${SourcesCore})
+add_library(iplug_core STATIC ${SourcesCore})
 
 set(SourcesCore
     IPlugAPIBase.h
@@ -113,22 +113,22 @@ if (NOT IOS)
 endif()
 
 
-target_sources(iplug_Core PRIVATE ${SourcesCore})
+target_sources(iplug_core PRIVATE ${SourcesCore})
 
-target_include_directories(iplug_Core PUBLIC
+target_include_directories(iplug_core PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}"
     "${CMAKE_CURRENT_SOURCE_DIR}/Extras"
 )
 
 # FIXME: dependencies
-target_include_directories(iplug_Core PUBLIC
+target_include_directories(iplug_core PUBLIC
     "../WDL"
     "../IGraphics"
     "../Dependencies/Extras/nlohmann"
 )
 
 if (APPLE)
-    target_compile_options(iplug_Core PRIVATE $<$<COMPILE_LANGUAGE:OBJCXX>:-fobjc-arc>)
+    target_compile_options(iplug_core PRIVATE $<$<COMPILE_LANGUAGE:OBJCXX>:-fobjc-arc>)
     set_source_files_properties(
       Extras/Cocoa/IPlugCocoaEditorDelegate.mm
       Extras/Cocoa/IPlugCocoaViewController.mm
@@ -136,14 +136,14 @@ if (APPLE)
       PROPERTIES
       COMPILE_FLAGS  $<$<COMPILE_LANGUAGE:OBJCXX>:-fno-objc-arc>
     )
-  target_link_libraries(iplug_Core PUBLIC "-framework AppKit" "-framework WebKit")
+  target_link_libraries(iplug_core PUBLIC "-framework AppKit" "-framework WebKit")
   # target_lin
 endif()
 
 ###################################################################################################
 # VST3
 
-add_library(iplug_VST3 STATIC)
+add_library(iplug_vst3 STATIC)
 set(SourcesVst3
   "VST3/IPlugVST3.h"
   "VST3/IPlugVST3.cpp"
@@ -159,25 +159,25 @@ set(SourcesVst3
   "VST3/IPlugVST3_View.h"
 )
 
-target_sources(iplug_VST3 PRIVATE ${SourcesVst3})
-target_compile_definitions(iplug_VST3 PUBLIC VST3_API)
-target_link_libraries(iplug_VST3 PUBLIC iplug_Core)
+target_sources(iplug_vst3 PRIVATE ${SourcesVst3})
+target_compile_definitions(iplug_vst3 PUBLIC VST3_API)
+target_link_libraries(iplug_vst3 PUBLIC iplug_core)
 
-target_link_libraries(iplug_VST3
+target_link_libraries(iplug_vst3
   PUBLIC pluginterfaces sdk
 )
 
-target_sources(iplug_VST3 PRIVATE
+target_sources(iplug_vst3 PRIVATE
   ../Dependencies/IPlug/VST3_SDK/public.sdk/source/vst/vstsinglecomponenteffect.cpp
   ../Dependencies/IPlug/VST3_SDK/public.sdk/source/vst/vstsinglecomponenteffect.h
 )
 
-target_include_directories(iplug_VST3 INTERFACE VST3)
+target_include_directories(iplug_vst3 INTERFACE VST3)
 
-target_compile_definitions(iplug_VST3 PUBLIC "$<IF:$<CONFIG:Debug>,DEVELOPMENT,RELEASE>")
+target_compile_definitions(iplug_vst3 PUBLIC "$<IF:$<CONFIG:Debug>,DEVELOPMENT,RELEASE>")
 
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
-  target_sources(iplug_VST3 INTERFACE "IPlugVST3_RunLoop.cpp")
+  target_sources(iplug_vst3 INTERFACE "IPlugVST3_RunLoop.cpp")
 endif()
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX IPlug/VST3 FILES ${SourcesVst3})

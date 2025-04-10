@@ -36,8 +36,8 @@ function(iplug_add_app PlugName)
   set(TargetName ${PlugName}App)
 
   add_executable(${TargetName} WIN32 MACOSX_BUNDLE ${ARG_SOURCES})
-  target_link_libraries(${TargetName} PUBLIC igraphics iplug_Core)
-  target_link_libraries(${TargetName} PUBLIC rtmidi rtaudio iplug_Core igraphics)
+  target_link_libraries(${TargetName} PUBLIC igraphics iplug_core)
+  target_link_libraries(${TargetName} PUBLIC rtmidi rtaudio iplug_core igraphics)
 
   set(SdkRoot ${CMAKE_CURRENT_FUNCTION_LIST_DIR})
   set(ResourceDir ${CMAKE_CURRENT_SOURCE_DIR}/resources)
@@ -105,7 +105,7 @@ function(iplug_add_vst3 PlugName)
   set(TargetName ${PlugName}VST3)
 
   add_library(${TargetName} MODULE ${ARG_SOURCES})
-  target_link_libraries(${TargetName} PUBLIC igraphics_VST3 iplug_Core)
+  target_link_libraries(${TargetName} PUBLIC igraphics_vst3 iplug_core)
 
   set(SdkRoot ${CMAKE_CURRENT_FUNCTION_LIST_DIR})
   set(ResourceDir ${CMAKE_CURRENT_SOURCE_DIR}/resources)
