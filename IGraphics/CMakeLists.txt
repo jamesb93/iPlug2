@@ -3,16 +3,16 @@ if (APPLE)
 endif()
 
 set(Flavours
-  IGraphics
-  IGraphics_VST3
+  igraphics
+  igraphics_VST3
 )
 
 if (APPLE)
-  list(APPEND IGraphics_AU IGraphics_AUv3)
+  list(APPEND igraphics_AU igraphics_AUv3)
 endif()
 
 if (IPLUG_AAX)
-  list(APPEND IGraphics_AAX)
+  list(APPEND igraphics_AAX)
 endif()
 
 # TODO: can we provide a single target and forward obj-c class definions to downstream targets?
@@ -28,7 +28,7 @@ foreach (Target ${Flavours})
     Drawing/IGraphicsSkia.cpp
     Drawing/IGraphicsNanoVG.cpp
     Drawing/IGraphicsCanvas.h
-    IGraphics_include_in_plug_hdr.h
+    igraphics_include_in_plug_hdr.h
     # Platforms/IGraphicsIOS_view.h
     # Platforms/IGraphicsWeb.cpp
     # Platforms/IGraphicsWeb.h
@@ -115,8 +115,8 @@ foreach (Target ${Flavours})
     IGraphicsStructs.h
     IGraphicsConstants.h
     IGraphicsLiveEdit.h
-    IGraphics_select.h
-    IGraphics_include_in_plug_src.h
+    igraphics_select.h
+    igraphics_include_in_plug_src.h
     IGraphicsEditorDelegate.h
     IControl.cpp
     IGraphics.h
@@ -203,19 +203,19 @@ foreach (Target ${Flavours})
     endif()
 endforeach()
 
-if (TARGET IGraphics_VST3)
-  target_link_libraries(IGraphics_VST3 PUBLIC iplug_VST3)
-  target_compile_definitions(IGraphics_VST3 PUBLIC VST3_API)
+if (TARGET igraphics_VST3)
+  target_link_libraries(igraphics_VST3 PUBLIC iplug_VST3)
+  target_compile_definitions(igraphics_VST3 PUBLIC VST3_API)
 endif()
 
-if (TARGET IGraphics_AU)
-  target_compile_definitions(IGraphics_AU PUBLIC AU_API)
+if (TARGET igraphics_AU)
+  target_compile_definitions(igraphics_AU PUBLIC AU_API)
 endif()
-if (TARGET IGraphics_AUv3)
-  target_compile_definitions(IGraphics_AUv3 PUBLIC AUv3_API)
+if (TARGET igraphics_AUv3)
+  target_compile_definitions(igraphics_AUv3 PUBLIC AUv3_API)
 endif()
-if (TARGET IGraphics_AAX)
+if (TARGET igraphics_AAX)
   # FIXME: embarassingly untested
-  target_link_libraries(IGraphics_VST3 PUBLIC AAX::Sdk)
-  target_compile_definitions(IGraphics_AAX PUBLIC AAX_API)
+  target_link_libraries(igraphics_VST3 PUBLIC AAX::Sdk)
+  target_compile_definitions(igraphics_AAX PUBLIC AAX_API)
 endif()
