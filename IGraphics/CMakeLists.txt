@@ -137,7 +137,7 @@ foreach (Target ${Flavours})
         ../IPlug/Extras
     )
 
-    target_link_libraries(${Target} PUBLIC Yoga STB)
+    target_link_libraries(${Target} PUBLIC yoga stb)
 
     if (NOT WIN32)
         set_source_files_properties(
@@ -187,7 +187,7 @@ foreach (Target ${Flavours})
     if(TRUE)
         # nanovg
         target_compile_definitions(${Target} PUBLIC IGRAPHICS_NANOVG)
-        target_link_libraries(${Target} PUBLIC NanoSVG)
+        target_link_libraries(${Target} PUBLIC nanosvg)
 
         set_source_files_properties(
             Drawing/IGraphicsCanvas.cpp
@@ -196,9 +196,9 @@ foreach (Target ${Flavours})
         )
         if (APPLE)
             target_compile_definitions(${Target} PUBLIC IGRAPHICS_METAL)
-            target_link_libraries(${Target} PUBLIC MetalNanoVG)
+            target_link_libraries(${Target} PUBLIC metal_nanovg)
         else()
-            target_link_libraries(${Target} PUBLIC NanoVG)
+            target_link_libraries(${Target} PUBLIC nanovg)
         endif()
     endif()
 endforeach()

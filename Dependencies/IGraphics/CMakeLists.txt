@@ -1,7 +1,7 @@
 ###################################################################################################
 # Yoga
 
-add_library(Yoga STATIC
+add_library(yoga STATIC
     yoga/yoga/YGFloatOptional.h
     yoga/yoga/Utils.h
     yoga/yoga/CompactValue.h
@@ -31,7 +31,7 @@ add_library(Yoga STATIC
     yoga/yoga/Bitfield.h
 )
 
-target_include_directories(Yoga
+target_include_directories(yoga
     SYSTEM PUBLIC yoga/yoga
                   yoga
 )
@@ -40,7 +40,7 @@ target_include_directories(Yoga
 ###################################################################################################
 # NanoVG
 
-add_library(NanoVG STATIC
+add_library(nanovg STATIC
     NanoVG/src/nanovg_gl.h
     NanoVG/src/nanovg.h
     NanoVG/src/stb_image.h
@@ -50,7 +50,7 @@ add_library(NanoVG STATIC
     NanoVG/src/nanovg.c
 )
 
-target_include_directories(NanoVG
+target_include_directories(nanovg
     SYSTEM PUBLIC NanoVG/src
 )
 
@@ -59,7 +59,7 @@ target_include_directories(NanoVG
 
 if(APPLE)
     enable_language(OBJC)
-    add_library(MetalNanoVG STATIC
+    add_library(metal_nanovg STATIC
         MetalNanoVG/src/nanovg_mtl_shaders.metal
         MetalNanoVG/src/nanovg_mtl.m
         MetalNanoVG/src/mnvg_bitcode/ios.h
@@ -69,34 +69,34 @@ if(APPLE)
         MetalNanoVG/src/nanovg_mtl.h
     )
 
-    target_compile_options(MetalNanoVG PRIVATE -fobjc-arc)
+    target_compile_options(metal_nanovg PRIVATE -fobjc-arc)
 
-    target_include_directories(MetalNanoVG
+    target_include_directories(metal_nanovg
        SYSTEM PUBLIC MetalNanoVG/src
     )
 
-    target_link_libraries(MetalNanoVG PUBLIC NanoVG "-framework Metal")
+    target_link_libraries(metal_nanovg PUBLIC nanovg "-framework Metal")
 endif()
 
 ###################################################################################################
 # NanoSVG
 
-add_library(NanoSVG INTERFACE
+add_library(nanosvg INTERFACE
     NanoSVG/src/nanosvg.h
     NanoSVG/src/nanosvgrast.h
 )
 
-target_include_directories(NanoSVG
+target_include_directories(nanosvg
     SYSTEM INTERFACE NanoSVG/src
 )
 
 ###################################################################################################
 # STB
 
-add_library(STB INTERFACE
+add_library(stb INTERFACE
     STB/stb_textedit.h
 )
 
-target_include_directories(STB
+target_include_directories(stb
     SYSTEM INTERFACE STB
 )

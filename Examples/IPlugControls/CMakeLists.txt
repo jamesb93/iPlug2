@@ -48,6 +48,16 @@ iplug_add_vst3(IPlugControls
     RESOURCES ${Resources}
 )
 
+set_target_properties(IPlugControlsApp PROPERTIES
+    OUTPUT_NAME_DEBUG "IPlugControls"
+    OUTPUT_NAME_RELEASE "IPlugControls"
+)
+
+set_target_properties(IPlugControlsVST3 PROPERTIES
+    OUTPUT_NAME_DEBUG "IPlugControls"
+    OUTPUT_NAME_RELEASE "IPlugControls"
+)
+
 if (APPLE)
     foreach (Target IPlugControlsApp IPlugControlsVST3)
         target_link_libraries(${Target} PUBLIC "-framework Accelerate")

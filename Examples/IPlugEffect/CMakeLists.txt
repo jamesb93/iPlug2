@@ -22,6 +22,15 @@ iplug_add_vst3(IPlugEffect
     RESOURCES resources/fonts/Roboto-Regular.ttf
 )
 
+set_target_properties(IPlugEffectApp PROPERTIES
+    OUTPUT_NAME_DEBUG "IPlugEffect"
+    OUTPUT_NAME_RELEASE "IPlugEffect"
+)
+
+set_target_properties(IPlugEffectVST3 PROPERTIES
+    OUTPUT_NAME_DEBUG "IPlugEffect"
+    OUTPUT_NAME_RELEASE "IPlugEffect"
+)
 
 
 if (0)
