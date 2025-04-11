@@ -142,3 +142,51 @@ function(iplug_add_vst3 PlugName)
     )
   endif()
 endfunction()
+
+function(iplug_add_auv2 PlugName)
+  cmake_policy(SET CMP0076 NEW)
+
+  cmake_parse_arguments(PARSE_ARGV 0 ARG "" "" "SOURCES;RESOURCES")
+
+  set(TargetName ${PlugName}AUv2)
+
+  add_library(${TargetName} MODULE ${ARG_SOURCES})
+  target_link_libraries(${TargetName} PUBLIC igraphics_auv2 iplug_core)
+
+  set(SdkRoot ${CMAKE_CURRENT_FUNCTION_LIST_DIR})
+  set(ResourceDir ${CMAKE_CURRENT_SOURCE_DIR}/resources)
+
+  target_compile_definitions(${TargetName} PUBLIC AU_API)
+  target_include_directories(${TargetName} PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/resources
+  )
+
+  target_compile_definitions(${TargetName} PUBLIC IPLUG_DSP=1 IPLUG_EDITOR=1)
+
+  set(Resources
+    "${ResourceDir}/${PlugName}.icns"
+    ${ARG_RESOURCES}
+  )
+
+  set_source_files_properties(${Resources}
+    PROPERTIES MACOSX_PACKAGE_LOCATION "Resources"
+  )
+
+  enable_language(OBJCXX)
+  # Set language for files combining C++ and Objective-C
+  target_link_libraries(${TargetName} PUBLIC "-framework AudioUnit -framework AudioToolbox -framework CoreAudio -framework CoreMIDI")
+
+  target_sources(${TargetName} PUBLIC ${Resources})
+  source_group(Resources FILES ${Resources})
+
+  set_target_properties(${TargetName} PROPERTIES
+    BUNDLE TRUE
+    MACOSX_BUNDLE TRUE
+    MACOSX_BUNDLE_INFO_PLIST
+      ${ResourceDir}/${PlugName}-AU-Info.plist
+    BUNDLE_EXTENSION "component"
+    PREFIX ""
+    SUFFIX ""
+  )
+endfunction()

@@ -40,12 +40,21 @@ set(Resources
 
 iplug_add_app(IPlugControls
     SOURCES ${SRC_FILES}
-    RESOURCES ${Resources}
+    RESOURCES resources/fonts/Roboto-Regular.ttf
 )
 
 iplug_add_vst3(IPlugControls
     SOURCES ${SRC_FILES}
-    RESOURCES ${Resources}
+    RESOURCES resources/fonts/Roboto-Regular.ttf
+)
+
+set(AUv2_SRC_FILES
+  "../../IPlug/AUv2/IPlugAU_view_factory.mm"
+)
+
+iplug_add_auv2(IPlugControls
+    SOURCES ${SRC_FILES} ${AUv2_SRC_FILES}
+    RESOURCES resources/fonts/Roboto-Regular.ttf
 )
 
 set_target_properties(IPlugControlsApp PROPERTIES
@@ -58,8 +67,13 @@ set_target_properties(IPlugControlsVST3 PROPERTIES
     OUTPUT_NAME_RELEASE "IPlugControls"
 )
 
+set_target_properties(IPlugControlsAUv2 PROPERTIES
+    OUTPUT_NAME_DEBUG "IPlugControls"
+    OUTPUT_NAME_RELEASE "IPlugControls"
+)
+
 if (APPLE)
-    foreach (Target IPlugControlsApp IPlugControlsVST3)
+    foreach (Target IPlugControlsApp IPlugControlsVST3 IPlugControlsAUv2)
         target_link_libraries(${Target} PUBLIC "-framework Accelerate")
     endforeach()
 endif()

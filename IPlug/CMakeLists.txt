@@ -181,3 +181,24 @@ if (CMAKE_SYSTEM_NAME MATCHES "Linux")
 endif()
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX IPlug/VST3 FILES ${SourcesVst3})
+
+###################################################################################################
+# AUv2
+
+add_library(iplug_auv2 STATIC)
+set(SourcesAuv2
+  "AUv2/IPlugAU.h"
+  "AUv2/IPlugAU.cpp"
+  "AUv2/IPlugAU_ioconfig.h"
+  # "AUv2/IPlugAU_view_factory.mm"
+  "AUv2/dfx-au-utilities.h"
+  "AUv2/dfx-au-utilities.c"
+)
+
+target_sources(iplug_auv2 PRIVATE ${SourcesAuv2})
+target_compile_definitions(iplug_auv2 PUBLIC AU_API)
+target_link_libraries(iplug_auv2 PUBLIC iplug_core)
+
+target_include_directories(iplug_auv2 INTERFACE AUv2)
+
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX IPlug/AUv2 FILES ${SourcesAuv2})

@@ -8,11 +8,11 @@ set(Flavours
 )
 
 if (APPLE)
-  list(APPEND igraphics_AU igraphics_AUv3)
+  list(APPEND Flavours igraphics_auv2 igraphics_auv3)
 endif()
 
 if (IPLUG_AAX)
-  list(APPEND igraphics_AAX)
+  list(APPEND Flavours igraphics_AAX)
 endif()
 
 # TODO: can we provide a single target and forward obj-c class definions to downstream targets?
@@ -129,7 +129,7 @@ foreach (Target ${Flavours})
 
     target_include_directories(${Target} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
 
-    # FIXME: can we have propret dependencies?
+    # FIXME: can we have proper dependencies?
     target_include_directories(${Target}
         PRIVATE
         ../WDL
@@ -208,11 +208,12 @@ if (TARGET igraphics_vst3)
   target_compile_definitions(igraphics_vst3 PUBLIC VST3_API)
 endif()
 
-if (TARGET igraphics_AU)
-  target_compile_definitions(igraphics_AU PUBLIC AU_API)
+if (TARGET igraphics_auv2)
+  target_link_libraries(igraphics_auv2 PUBLIC iplug_auv2)
+  target_compile_definitions(igraphics_auv2 PUBLIC AU_API)
 endif()
-if (TARGET igraphics_AUv3)
-  target_compile_definitions(igraphics_AUv3 PUBLIC AUv3_API)
+if (TARGET igraphics_auv3)
+  target_compile_definitions(igraphics_auv3 PUBLIC AUv3_API)
 endif()
 if (TARGET igraphics_AAX)
   # FIXME: embarassingly untested
