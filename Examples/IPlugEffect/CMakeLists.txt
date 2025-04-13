@@ -12,14 +12,18 @@ set(SRC_FILES
 )
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${SRC_FILES})
 
+set(Resources 
+  resources/fonts/Roboto-Regular.ttf
+)
+
 iplug_add_app(IPlugEffect
     SOURCES ${SRC_FILES}
-    RESOURCES resources/fonts/Roboto-Regular.ttf
+    RESOURCES ${Resources}
 )
 
 iplug_add_vst3(IPlugEffect
     SOURCES ${SRC_FILES}
-    RESOURCES resources/fonts/Roboto-Regular.ttf
+    RESOURCES ${Resources}
 )
 
 set(AUv2_SRC_FILES
@@ -28,20 +32,5 @@ set(AUv2_SRC_FILES
 
 iplug_add_auv2(IPlugEffect
     SOURCES ${SRC_FILES} ${AUv2_SRC_FILES}
-    RESOURCES resources/fonts/Roboto-Regular.ttf
-)
-
-set_target_properties(IPlugEffectApp PROPERTIES
-    OUTPUT_NAME_DEBUG "IPlugEffect"
-    OUTPUT_NAME_RELEASE "IPlugEffect"
-)
-
-set_target_properties(IPlugEffectVST3 PROPERTIES
-    OUTPUT_NAME_DEBUG "IPlugEffect"
-    OUTPUT_NAME_RELEASE "IPlugEffect"
-)
-
-set_target_properties(IPlugEffectAUv2 PROPERTIES
-    OUTPUT_NAME_DEBUG "IPlugEffect"
-    OUTPUT_NAME_RELEASE "IPlugEffect"
+    RESOURCES ${Resources}
 )

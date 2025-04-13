@@ -93,6 +93,8 @@ function(iplug_add_app PlugName)
       MACOSX_BUNDLE TRUE
       MACOSX_BUNDLE_INFO_PLIST
         ${ResourceDir}/${PlugName}-macOS-Info.plist
+      OUTPUT_NAME_DEBUG ${PlugName}
+      OUTPUT_NAME_RELEASE ${PlugName}
     )
   endif()
 endfunction()
@@ -139,7 +141,15 @@ function(iplug_add_vst3 PlugName)
       BUNDLE_EXTENSION "vst3"
       PREFIX ""
       SUFFIX ""
+      OUTPUT_NAME_DEBUG ${PlugName}
+      OUTPUT_NAME_RELEASE ${PlugName}    
     )
+
+    # Create PkgInfo file to make it appear as a bundle in Finder
+    set(PKGINFO_FILE "${CMAKE_CURRENT_BINARY_DIR}/${PlugName}.vst3/Contents/PkgInfo")
+    file(WRITE ${PKGINFO_FILE} "BNDL????")
+    add_custom_command(TARGET ${TargetName} POST_BUILD
+      COMMAND ${CMAKE_COMMAND} -E touch ${PKGINFO_FILE})
   endif()
 endfunction()
 
@@ -188,5 +198,13 @@ function(iplug_add_auv2 PlugName)
     BUNDLE_EXTENSION "component"
     PREFIX ""
     SUFFIX ""
+    OUTPUT_NAME_DEBUG ${PlugName}
+    OUTPUT_NAME_RELEASE ${PlugName}  
   )
+
+  # Create PkgInfo file to make it appear as a bundle in Finder
+  set(PKGINFO_FILE "${CMAKE_CURRENT_BINARY_DIR}/${PlugName}.component/Contents/PkgInfo")
+  file(WRITE ${PKGINFO_FILE} "BNDL????")
+  add_custom_command(TARGET ${TargetName} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E touch ${PKGINFO_FILE})
 endfunction()

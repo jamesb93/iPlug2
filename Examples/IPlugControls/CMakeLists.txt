@@ -40,12 +40,12 @@ set(Resources
 
 iplug_add_app(IPlugControls
     SOURCES ${SRC_FILES}
-    ${Resources}
+    RESOURCES ${Resources}
 )
 
 iplug_add_vst3(IPlugControls
     SOURCES ${SRC_FILES}
-    ${Resources}
+    RESOURCES ${Resources}
 )
 
 set(AUv2_SRC_FILES
@@ -54,7 +54,7 @@ set(AUv2_SRC_FILES
 
 iplug_add_auv2(IPlugControls
     SOURCES ${SRC_FILES} ${AUv2_SRC_FILES}
-    ${Resources}
+    RESOURCES ${Resources}
 )
 
 if (APPLE)
