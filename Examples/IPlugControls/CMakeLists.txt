@@ -40,12 +40,12 @@ set(Resources
 
 iplug_add_app(IPlugControls
     SOURCES ${SRC_FILES}
-    RESOURCES resources/fonts/Roboto-Regular.ttf
+    ${Resources}
 )
 
 iplug_add_vst3(IPlugControls
     SOURCES ${SRC_FILES}
-    RESOURCES resources/fonts/Roboto-Regular.ttf
+    ${Resources}
 )
 
 set(AUv2_SRC_FILES
@@ -54,22 +54,7 @@ set(AUv2_SRC_FILES
 
 iplug_add_auv2(IPlugControls
     SOURCES ${SRC_FILES} ${AUv2_SRC_FILES}
-    RESOURCES resources/fonts/Roboto-Regular.ttf
-)
-
-set_target_properties(IPlugControlsApp PROPERTIES
-    OUTPUT_NAME_DEBUG "IPlugControls"
-    OUTPUT_NAME_RELEASE "IPlugControls"
-)
-
-set_target_properties(IPlugControlsVST3 PROPERTIES
-    OUTPUT_NAME_DEBUG "IPlugControls"
-    OUTPUT_NAME_RELEASE "IPlugControls"
-)
-
-set_target_properties(IPlugControlsAUv2 PROPERTIES
-    OUTPUT_NAME_DEBUG "IPlugControls"
-    OUTPUT_NAME_RELEASE "IPlugControls"
+    ${Resources}
 )
 
 if (APPLE)

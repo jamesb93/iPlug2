@@ -27,58 +27,58 @@ set(SourcesCore
     IPlugTimer.cpp
     IPlugUtilities.h
 
-    Extras/Easing.h
-    Extras/DCBlocker.h
-    Extras/Smoothers.h
-    Extras/NChanDelay.h
-    # Extras/OSC/IPlugOSC_msg.h
-    # Extras/OSC/IPlugOSC.cpp
-    # Extras/OSC/IPlugOSC.h
-    # Extras/OSC/IPlugOSC_msg.cpp
-    Extras/LanczosResampler.h
-    Extras/ADSREnvelope.h
-    Extras/Oscillator.h
-    Extras/NoiseGate.h
-    Extras/WebView/IPlugWKWebViewUIDelegate.mm
-    Extras/WebView/IPlugWebView.cpp
-    Extras/WebView/IPlugWebView_mac.mm
-    Extras/WebView/IPlugWKWebViewDelegate.mm
-    Extras/WebView/IPlugWKWebViewScriptMessageHandler.mm
-    Extras/WebView/IPlugWKWebViewScriptMessageHandler.h
-    Extras/WebView/IPlugWebViewEditorDelegate.mm
-    Extras/WebView/IPlugWKWebViewDelegate.h
-    Extras/WebView/IPlugWebView.h
-    Extras/WebView/IPlugWKWebView.h
-    Extras/WebView/IPlugWKWebViewUIDelegate.h
-    Extras/WebView/IPlugWebViewEditorDelegate.h
-    Extras/WebView/IPlugWebViewEditorDelegate.cpp
-    Extras/WebView/LICENSE.txt
-    Extras/WebView/IPlugWKWebView.mm
-    Extras/HIIR/PolyphaseIIR2Designer.h
-    Extras/HIIR/FPUUpsampler2x.h
-    Extras/HIIR/PolyphaseIIR2Designer.cpp
-    Extras/HIIR/FPUStageProc.h
-    Extras/HIIR/readme.txt
-    Extras/HIIR/FPUDownsampler2x.h
-    Extras/HIIR/license.txt
-    Extras/README.md
-    Extras/PlatformView/IPlugPlatformView.mm
-    Extras/PlatformView/IPlugPlatformView.h
-    Extras/RealtimeResampler.h
-    Extras/Synth/VoiceAllocator.h
-    Extras/Synth/SynthVoice.h
-    Extras/Synth/VoiceAllocator.cpp
-    Extras/Synth/MidiSynth.h
-    Extras/Synth/ControlRamp.h
-    Extras/Synth/MidiSynth.cpp
-    Extras/Cocoa/IPlugCocoaEditorDelegate.mm
-    Extras/Cocoa/IPlugCocoaEditorDelegate.h
-    Extras/Cocoa/IPlugCocoaViewController.h
-    Extras/Cocoa/IPlugCocoaViewController.mm
-    Extras/SVF.h
-    Extras/LFO.h
-    Extras/Oscillator_table.h
-    Extras/Oversampler.h
+    # Extras/Easing.h
+    # Extras/DCBlocker.h
+    # Extras/Smoothers.h
+    # Extras/NChanDelay.h
+    # # Extras/OSC/IPlugOSC_msg.h
+    # # Extras/OSC/IPlugOSC.cpp
+    # # Extras/OSC/IPlugOSC.h
+    # # Extras/OSC/IPlugOSC_msg.cpp
+    # Extras/LanczosResampler.h
+    # Extras/ADSREnvelope.h
+    # Extras/Oscillator.h
+    # Extras/NoiseGate.h
+    # Extras/WebView/IPlugWKWebViewUIDelegate.mm
+    # Extras/WebView/IPlugWebView.cpp
+    # Extras/WebView/IPlugWebView_mac.mm
+    # Extras/WebView/IPlugWKWebViewDelegate.mm
+    # Extras/WebView/IPlugWKWebViewScriptMessageHandler.mm
+    # Extras/WebView/IPlugWKWebViewScriptMessageHandler.h
+    # Extras/WebView/IPlugWebViewEditorDelegate.mm
+    # Extras/WebView/IPlugWKWebViewDelegate.h
+    # Extras/WebView/IPlugWebView.h
+    # Extras/WebView/IPlugWKWebView.h
+    # Extras/WebView/IPlugWKWebViewUIDelegate.h
+    # Extras/WebView/IPlugWebViewEditorDelegate.h
+    # Extras/WebView/IPlugWebViewEditorDelegate.cpp
+    # Extras/WebView/LICENSE.txt
+    # Extras/WebView/IPlugWKWebView.mm
+    # Extras/HIIR/PolyphaseIIR2Designer.h
+    # Extras/HIIR/FPUUpsampler2x.h
+    # Extras/HIIR/PolyphaseIIR2Designer.cpp
+    # Extras/HIIR/FPUStageProc.h
+    # Extras/HIIR/readme.txt
+    # Extras/HIIR/FPUDownsampler2x.h
+    # Extras/HIIR/license.txt
+    # Extras/README.md
+    # Extras/PlatformView/IPlugPlatformView.mm
+    # Extras/PlatformView/IPlugPlatformView.h
+    # Extras/RealtimeResampler.h
+    # Extras/Synth/VoiceAllocator.h
+    # Extras/Synth/SynthVoice.h
+    # Extras/Synth/VoiceAllocator.cpp
+    # Extras/Synth/MidiSynth.h
+    # Extras/Synth/ControlRamp.h
+    # Extras/Synth/MidiSynth.cpp
+    # Extras/Cocoa/IPlugCocoaEditorDelegate.mm
+    # Extras/Cocoa/IPlugCocoaEditorDelegate.h
+    # Extras/Cocoa/IPlugCocoaViewController.h
+    # Extras/Cocoa/IPlugCocoaViewController.mm
+    # Extras/SVF.h
+    # Extras/LFO.h
+    # Extras/Oscillator_table.h
+    # Extras/Oversampler.h
 )
 
 if (NOT WIN32)
