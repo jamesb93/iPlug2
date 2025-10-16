@@ -124,7 +124,7 @@ float GetScaleForHWND(HWND hWnd)
   if (!__GetDpiForWindow)
   {
     HINSTANCE h = LoadLibraryA("user32.dll");
-    if (h) *(void**)&__GetDpiForWindow = GetProcAddress(h, "GetDpiForWindow");
+    if (h) *(void**)&__GetDpiForWindow = reinterpret_cast<void*>(GetProcAddress(h, "GetDpiForWindow"));
 
     if (!__GetDpiForWindow)
       return 1;
